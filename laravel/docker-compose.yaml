@@ -4,8 +4,8 @@ services:
       context: .
       dockerfile: docker/php/Dockerfile
     container_name: laravel-app
-    ports:
-      - "9000:9000"
+    expose:
+      - "9000" # Exposed only to other services on docker network (use "ports" if exposing to host machine)
     working_dir: /var/www/html
     depends_on:
       - db
@@ -43,8 +43,8 @@ services:
   nginx:
     image: nginx:alpine
     container_name: nginx
-    ports:
-      - "8888:80"
+    expose:
+      - "80" # Exposed only to Docker network
     volumes:
       - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
       - .:/var/www/html # important to mount this also so static assets can be served

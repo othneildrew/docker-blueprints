@@ -1,0 +1,19 @@
+services:
+  hello-world:
+    image: nginx:alpine
+    container_name: hello-world
+    restart: unless-stopped
+    expose:
+      - "80"
+    networks:
+      - web
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.app.entrypoints=websecure
+      - traefik.http.routers.app.rule=Host(`subdomain.example.com`)
+      - traefik.http.routers.app.tls.certresolver=le
+      - traefik.http.services.app.loadbalancer.server.port=80
+
+networks:
+  web:
+    external: true

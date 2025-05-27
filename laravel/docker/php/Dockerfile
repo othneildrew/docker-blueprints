@@ -53,6 +53,7 @@ RUN php artisan key:generate \
     && php artisan config:cache \
 #    && php artisan route:cache \ # will not work if using routes w/ closures (use controllers)
     && php artisan view:cache
+    # or can just use "php artisan optimize" which clears and recaches everything
 
 # Other steps (I prefer to do manually)
 ## Run migrations
